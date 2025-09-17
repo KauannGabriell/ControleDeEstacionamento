@@ -1,12 +1,4 @@
-﻿using eAgenda.Core.Dominio.Compartilhado;
-using eAgenda.Core.Dominio.ModuloAutenticacao;
-using eAgenda.Core.Dominio.ModuloCategoria;
-using eAgenda.Core.Dominio.ModuloCompromisso;
-using eAgenda.Core.Dominio.ModuloContato;
-using eAgenda.Core.Dominio.ModuloDespesa;
-using eAgenda.Core.Dominio.ModuloTarefa;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 
