@@ -11,10 +11,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
     <Folder Include="AutoMapper\" />
     <Folder Include="Identity\" />
+    <Folder Include="Models\ModuloCheckin\" />
+    <Folder Include="Models\ModuloFaturamento\" />
+    <Folder Include="Models\ModuloRastreamento\" />
+    <Folder Include="Models\ModuloAutenticacao\" />
   </ItemGroup>
 
 </Project>
