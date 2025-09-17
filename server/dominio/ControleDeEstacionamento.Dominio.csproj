@@ -9,7 +9,6 @@
   <ItemGroup>
     <Folder Include="ModuloAutenticacao\" />
     <Folder Include="ModuloCheckin\" />
-    <Folder Include="ModuloFaturamento\" />
     <Folder Include="ModuloTicket\" />
   </ItemGroup>
 
