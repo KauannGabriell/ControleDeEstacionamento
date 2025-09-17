@@ -1,7 +1,8 @@
 ﻿using ControleDeEstacionamento.Core.Dominio.Compartilhado;
+using ControleDeEstacionamento.Dominio.ModuloCheckin;
 using ControleDeEstacionamento.Dominio.ModuloVeiculo;
 
-namespace ControleDeEstacionamento.Dominio.ModuloCheckin;
+namespace ControleDeEstacionamento.Dominio.ModuloTicket;
 public class Ticket : EntidadeBase<Ticket>
 {
     public Veiculo Veiculo { get; set; }

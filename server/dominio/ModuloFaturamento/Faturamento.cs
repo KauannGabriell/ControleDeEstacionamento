@@ -7,7 +7,10 @@ public class Faturamento : EntidadeBase<Faturamento>
     public string ValorDiaria { get; set; }
     public string Cor { get; set; }
 
-    public override void AtualizarRegistro()
+    public override void AtualizarRegistro(Faturamento registroEditado)
     {
+        Placa = registroEditado.Placa;
+        ValorDiaria = registroEditado.ValorDiaria;
+        Cor = registroEditado.Cor;
     }
 }

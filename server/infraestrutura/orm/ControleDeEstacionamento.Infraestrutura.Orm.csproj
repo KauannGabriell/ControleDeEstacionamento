@@ -11,4 +11,16 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.19" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\dominio\ControleDeEstacionamento.Dominio.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ModuloVeiculo\" />
+    <Folder Include="ModuloFaturamento\" />
+    <Folder Include="ModuloVaga\" />
+    <Folder Include="ModuloCheckin\" />
+    <Folder Include="ModuloTicket\" />
+  </ItemGroup>
+
 </Project>

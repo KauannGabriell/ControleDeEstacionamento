@@ -1,19 +1,24 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ControleDeEstacionamento.Core.Dominio.Compartilhado;
+using ControleDeEstacionamento.Core.Dominio.ModuloAutenticacao;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 
-namespace eAgenda.Infraestrutura.Orm.Compartilhado;
+namespace ControleDeEstacionamento.Infraestrutura.Orm.Compartilhado;
 
 public class AppDbContext(DbContextOptions options, ITenantProvider? tenantProvider = null) :
     IdentityDbContext<Usuario, Cargo, Guid>(options), IUnitOfWork
 {
+
+
     
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         if (tenantProvider is not null)
         {
-            m
+            
         }
 
         var assembly = typeof(AppDbContext).Assembly;

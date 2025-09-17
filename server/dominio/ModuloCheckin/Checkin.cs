@@ -1,4 +1,5 @@
 ﻿using ControleDeEstacionamento.Core.Dominio.Compartilhado;
+using ControleDeEstacionamento.Dominio.ModuloTicket;
 using ControleDeEstacionamento.Dominio.ModuloVeiculo;
 
 namespace ControleDeEstacionamento.Dominio.ModuloCheckin;

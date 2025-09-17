@@ -1,36 +1,55 @@
+using ControleDeEstacionamento.WebApi.AutoMapper;
+using ControleDeEstacionamento.WebApi.Orm;
+using eAgenda.Core.Aplicacao;
+using eAgenda.Infraestrutura.Orm;
+using eAgenda.WebApi.AutoMapper;
+using eAgenda.WebApi.Identity;
+using eAgenda.WebApi.Orm;
+using eAgenda.WebApi.Swagger;
+using System.Text.Json.Serialization;
 
-namespace ControleDeEstacionamento.WebApi
+namespace eAgenda.WebApi;
+
+public class Program
 {
-    public class Program
+    public static void Main(string[] args)
     {
-        public static void Main(string[] args)
+        var builder = WebApplication.CreateBuilder(args);
+
+        // Add services to the container.
+        builder.Services
+            .AddCamadaAplicacao(builder.Logging, builder.Configuration)
+            .AddCamadaInfraestruturaOrm(builder.Configuration);
+
+        builder.Services.AddAutoMapperProfiles(builder.Configuration);
+
+        builder.Services.AddIdentityProviderConfig(builder.Configuration);
+
+        builder.Services
+            .AddControllers()
+            .AddJsonOptions(options =>
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+
+        // Swagger/OpenAPI https://aka.ms/aspnetcore/swashbuckle
+
+        var app = builder.Build();
+
+        if (app.Environment.IsDevelopment())
         {
-            var builder = WebApplication.CreateBuilder(args);
+            app.ApplyMigrations();
 
-            // Add services to the container.
-
-            builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
-
-            var app = builder.Build();
-
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
-
-            app.UseHttpsRedirection();
-
-            app.UseAuthorization();
-
-
-            app.MapControllers();
-
-            app.Run();
+            app.UseSwagger();
+            app.UseSwaggerUI();
         }
+
+        app.UseHttpsRedirection();
+
+        app.UseAuthentication();
+
+        app.UseAuthorization();
+
+        app.MapControllers();
+
+        app.Run();
     }
 }
