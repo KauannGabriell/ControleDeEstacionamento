@@ -14,6 +14,10 @@ public class Checkin : EntidadeBase<Checkin>
         {
             return DateTime.Now;
         }
+
+        set
+        {
+        }
     }
     public int UltimoIdTicket { get; set; }
     public Veiculo Veiculo { get; set; }
@@ -21,20 +25,16 @@ public class Checkin : EntidadeBase<Checkin>
     public StatusCheckin Status { get; set; }
     public Vaga Vaga { get; set; }
     public Hospede? Hospede { get; set; }
-    public Ticket Ticket
-    {
-        get
-        {
-            return Ticket.GerarTicket(Vaga, DataEntrada, Hospede, Veiculo, UltimoIdTicket);
-        }
-    }
-
+    public Ticket Ticket { get; set;}
 
     public override void AtualizarRegistro(Checkin registroEditado)
     {
         Veiculo = registroEditado.Veiculo;
         Hospede = registroEditado.Hospede;
         DataSaida = registroEditado.DataSaida;
+        Status = registroEditado.Status;
+        Ticket = registroEditado.Ticket;
+        Vaga  = registroEditado.Vaga;
     }
 
     public void FinalizarTicket(Checkin checkin)

@@ -11,17 +11,16 @@ namespace ControleDeEstacionamento.Infraestutura.Orm.ModuloCheckin
         {
 
             builder.Property(c => c.Id)
-                   .ValueGeneratedNever()
-                   .IsRequired();
+                        .ValueGeneratedNever()
+                        .IsRequired();
 
             builder.Property(c => c.DataEntrada)
                         .IsRequired();
 
             builder.Property(c => c.UltimoIdTicket)
-              .IsRequired();
+                        .IsRequired();
 
-            builder.HasOne(c => c.Veiculo)
-            .WithOne();
+            builder.HasOne(c => c.Veiculo);
 
             builder.Property(c => c.DataSaida)
                         .IsRequired(false);
@@ -30,11 +29,13 @@ namespace ControleDeEstacionamento.Infraestutura.Orm.ModuloCheckin
                         .IsRequired();
 
             builder.HasOne(c => c.Vaga)
-                .WithMany();
+                        .WithMany();
 
             builder.HasOne(c => c.Hospede)
-                .WithMany()
-                .IsRequired(false);
+                        .WithMany()
+                        .IsRequired(false);
+
+            builder.HasOne(c => c.Ticket);
         }
     }
 }

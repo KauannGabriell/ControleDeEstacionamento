@@ -1,12 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ControleDeEstacionamento.Dominio.ModuloVaga;
+using ControleDeEstacionamento.Dominio.ModuloVeiculo;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace ControleDeEstacionamento.Infraestrutura.Orm.ModuloVeiculo
+namespace ControleDeEstacionamento.Infraestrutura.Orm.ModuloVaga
 {
-    internal class MapeadorVeiculoEmOrm
+    public class MapeadorVeiculoEmOrm : IEntityTypeConfiguration<Veiculo>
     {
+        public void Configure(EntityTypeBuilder<Veiculo> builder)
+        {
+            builder.Property(t => t.Id)
+                   .ValueGeneratedNever()
+                   .IsRequired();
+
+            builder.Property(v => v.Placa)
+                    .IsRequired();
+
+            builder.Property(v => v.Modelo)
+                   .IsRequired();
+
+            builder.Property(v => v.Cor)
+              .IsRequired();
+
+            builder.HasOne(c => c.Hospede);
+        }
     }
 }

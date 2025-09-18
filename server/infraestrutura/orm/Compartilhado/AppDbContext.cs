@@ -4,6 +4,7 @@ using ControleDeEstacionamento.Dominio.ModuloCheckin;
 using ControleDeEstacionamento.Dominio.ModuloCheckout;
 using ControleDeEstacionamento.Dominio.ModuloFaturamento;
 using ControleDeEstacionamento.Dominio.ModuloHospede;
+using ControleDeEstacionamento.Dominio.ModuloRastreamento;
 using ControleDeEstacionamento.Dominio.ModuloTicket;
 using ControleDeEstacionamento.Dominio.ModuloVaga;
 using ControleDeEstacionamento.Dominio.ModuloVeiculo;
@@ -12,8 +13,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ControleDeEstacionamento.Infraestrutura.Orm.Compartilhado;
 
-public class AppDbContext(DbContextOptions options, ITenantProvider? tenantProvider = null) :
-    IdentityDbContext<Usuario, Cargo, Guid>(options), IUnitOfWork
+public class AppDbContext(DbContextOptions options) : IdentityDbContext<Usuario, Cargo, Guid>(options), IUnitOfWork
 {
     public DbSet<Vaga> Vagas { get; set; }
     public DbSet<Veiculo> Veiculos { get; set; }
@@ -24,13 +24,10 @@ public class AppDbContext(DbContextOptions options, ITenantProvider? tenantProvi
     public DbSet<Ticket> Tickets { get; set; }
     public DbSet<Hospede> Hospedes { get; set; }
 
+    public DbSet<Estacionamento> Estacionamentos { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        if (tenantProvider is not null)
-        {
-            
-        }
-
         var assembly = typeof(AppDbContext).Assembly;
 
         modelBuilder.ApplyConfigurationsFromAssembly(assembly);

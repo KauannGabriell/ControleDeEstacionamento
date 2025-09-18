@@ -31,36 +31,5 @@ public static class IdentityConfig
 
     private static void AddJwtAuthentication(this IServiceCollection services, IConfiguration configuration)
     {
-        var chaveAssinaturaJwt = configuration["JWT_GENERATION_KEY"];
-
-        if (chaveAssinaturaJwt is null)
-            throw new ArgumentException("Não foi possível obter a chave de assinatura de tokens.");
-
-        var chaveEmBytes = Encoding.ASCII.GetBytes(chaveAssinaturaJwt);
-
-        var audienciaValida = configuration["JWT_AUDIENCE_DOMAIN"];
-
-        if (audienciaValida is null)
-            throw new ArgumentException("Não foi possível obter o domínio da audiência dos tokens.");
-
-        services.AddAuthentication(x =>
-        {
-            x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-        }).AddJwtBearer(x =>
-        {
-            x.RequireHttpsMetadata = true;
-            x.SaveToken = true;
-            x.TokenValidationParameters = new TokenValidationParameters
-            {
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(chaveEmBytes),
-                ValidAudience = audienciaValida,
-                ValidIssuer = "eAgenda",
-                ValidateAudience = true,
-                ValidateIssuer = true,
-                ValidateLifetime = true
-            };
-        });
     }
 }

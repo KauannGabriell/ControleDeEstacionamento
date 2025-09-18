@@ -3,6 +3,7 @@ using ControleDeEstacionamento.Dominio.ModuloCheckin;
 using ControleDeEstacionamento.Dominio.ModuloFaturamento;
 using ControleDeEstacionamento.Dominio.ModuloTicket;
 using ControleDeEstacionamento.Dominio.ModuloVaga;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ControleDeEstacionamento.Dominio.ModuloCheckout;
 public class Checkout  : EntidadeBase<Checkout>
@@ -17,7 +18,11 @@ public class Checkout  : EntidadeBase<Checkout>
         {
         }
     }
-    public Fatura Fatura { get; set; }
+
+    public Ticket Ticket { get; set; }
+
+    [NotMapped]
+    public Fatura? Fatura { get; set; }
 
     public void FinalizarCheckin(Ticket ticket, Checkin checkin)
     {

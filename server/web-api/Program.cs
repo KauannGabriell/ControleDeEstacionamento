@@ -1,55 +1,54 @@
+using ControleDeEstacionamento.Core.Aplicacao;
 using ControleDeEstacionamento.WebApi.AutoMapper;
 using ControleDeEstacionamento.WebApi.Orm;
-using eAgenda.Core.Aplicacao;
-using eAgenda.Infraestrutura.Orm;
-using eAgenda.WebApi.AutoMapper;
+using ControleDeEstacionamento.WebApi.Swagger;
 using eAgenda.WebApi.Identity;
-using eAgenda.WebApi.Orm;
-using eAgenda.WebApi.Swagger;
+using ControleDeEstacionamento.Infraestutura.Orm;
 using System.Text.Json.Serialization;
 
-namespace eAgenda.WebApi;
-
-public class Program
+namespace Gestao_de_Estacionamentos.WebApi
 {
-    public static void Main(string[] args)
+    public class Program
     {
-        var builder = WebApplication.CreateBuilder(args);
-
-        // Add services to the container.
-        builder.Services
-            .AddCamadaAplicacao(builder.Logging, builder.Configuration)
-            .AddCamadaInfraestruturaOrm(builder.Configuration);
-
-        builder.Services.AddAutoMapperProfiles(builder.Configuration);
-
-        builder.Services.AddIdentityProviderConfig(builder.Configuration);
-
-        builder.Services
-            .AddControllers()
-            .AddJsonOptions(options =>
-                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
-
-        // Swagger/OpenAPI https://aka.ms/aspnetcore/swashbuckle
-
-        var app = builder.Build();
-
-        if (app.Environment.IsDevelopment())
+        public static void Main(string[] args)
         {
-            app.ApplyMigrations();
+            var builder = WebApplication.CreateBuilder(args);
 
-            app.UseSwagger();
-            app.UseSwaggerUI();
+            builder.Services
+                    .AddCamadaAplicacao(builder.Logging, builder.Configuration);
+
+                    builder.Services.AddCamadaInfraestruturaOrm(builder.Configuration);
+
+            builder.Services.AddAutoMapperProfiles(builder.Configuration);
+
+            builder.Services.AddIdentityProviderConfig(builder.Configuration);
+
+            builder.Services
+                .AddControllers()
+                .AddJsonOptions(options =>
+                    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+
+            builder.Services.AddSwaggerConfig();
+
+            builder.Services.AddSwaggerGen(c =>
+            {
+            });
+
+            var app = builder.Build();
+
+            if (app.Environment.IsDevelopment())
+            {
+                app.ApplyMigrations();
+
+                app.UseSwagger();
+                app.UseSwaggerUI();
+            }
+
+            app.UseHttpsRedirection();
+            app.UseAuthentication();
+            app.UseAuthorization();
+            app.MapControllers();
+            app.Run();
         }
-
-        app.UseHttpsRedirection();
-
-        app.UseAuthentication();
-
-        app.UseAuthorization();
-
-        app.MapControllers();
-
-        app.Run();
     }
 }

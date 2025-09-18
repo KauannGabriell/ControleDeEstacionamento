@@ -1,4 +1,4 @@
-﻿using eAgenda.Infraestrutura.Orm.Compartilhado;
+﻿using ControleDeEstacionamento.Infraestrutura.Orm.Compartilhado;
 using Microsoft.EntityFrameworkCore;
 
 namespace ControleDeEstacionamento.WebApi.Orm;

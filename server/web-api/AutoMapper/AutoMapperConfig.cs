@@ -1,4 +1,5 @@
 ﻿using eAgenda.WebApi;
+using Gestao_de_Estacionamentos.WebApi;
 
 namespace ControleDeEstacionamento.WebApi.AutoMapper;
 

@@ -3,14 +3,15 @@ using ControleDeEstacionamento.Core.Dominio.Compartilhado;
 using ControleDeEstacionamento.Dominio.ModuloVaga;
 using ControleDeEstacionamento.Dominio.ModuloVeiculo;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ControleDeEstacionamento.Dominio.ModuloRastreamento;
 public class Estacionamento : EntidadeBase<Estacionamento>
 {
     public List<Vaga> Vagas { get; set; }
-    public List<Vaga> VagasOCupadas { get; set; }
-    public List<Veiculo> Veiculos { get; set; }
 
+    [NotMapped]
+    public List<Vaga> VagasOCupadas { get; set; }
     public List<Vaga> ObtendoVagasPorZona(int numeroVagasZona, char zona)
     {
 
@@ -20,7 +21,8 @@ public class Estacionamento : EntidadeBase<Estacionamento>
             Vagas.Add(new Vaga
             {
                 Zona = zona,
-                Status = StatusVaga.Disponivel
+                Status = StatusVaga.Disponivel,
+                IdentificadorVaga = GeradorIdentificadorVaga.CriarGuidString()
             });
         }
         return Vagas;
@@ -30,7 +32,6 @@ public class Estacionamento : EntidadeBase<Estacionamento>
     {
         
         Vagas = registroEditado.Vagas;
-        Veiculos = registroEditado.Veiculos;
         VagasOCupadas = registroEditado.VagasOCupadas;
     }
 }

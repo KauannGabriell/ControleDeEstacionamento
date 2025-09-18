@@ -1,9 +1,12 @@
 ﻿using ControleDeEstacionamento.Core.Dominio.Compartilhado;
 using ControleDeEstacionamento.Dominio.ModuloCheckin;
+using ControleDeEstacionamento.Dominio.ModuloCheckout;
 using ControleDeEstacionamento.Dominio.ModuloFaturamento;
 using ControleDeEstacionamento.Dominio.ModuloHospede;
 using ControleDeEstacionamento.Dominio.ModuloVaga;
 using ControleDeEstacionamento.Dominio.ModuloVeiculo;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ControleDeEstacionamento.Dominio.ModuloTicket;
 
@@ -15,7 +18,12 @@ public class Ticket : EntidadeBase<Ticket>
     public DateTime DataEntrada { get; set; }
     public Vaga Vaga { get; set; }
     public StatusCheckin Status { get; set; }
+
+    [NotMapped]
     public Fatura? Fatura { get; set; }
+
+    [NotMapped]
+    public Checkin Checkin { get; set; }
     public override void AtualizarRegistro(Ticket registroEditado)
     {
         Fatura = registroEditado.Fatura;

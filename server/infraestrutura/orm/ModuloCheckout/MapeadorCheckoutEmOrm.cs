@@ -16,8 +16,7 @@ namespace ControleDeEstacionamento.Infraestrutura.Orm.ModuloCheckout
             builder.Property(c => c.DataSaida)
                    .IsRequired();
 
-            builder.HasOne(c => c.Fatura)
-                .WithOne();
+            builder.HasOne(c => c.Ticket);
         }
     }
 }

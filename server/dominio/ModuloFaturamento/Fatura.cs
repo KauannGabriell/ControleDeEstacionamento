@@ -1,15 +1,15 @@
 ﻿using ControleDeEstacionamento.Core.Dominio.Compartilhado;
 using ControleDeEstacionamento.Dominio.ModuloCheckin;
 using ControleDeEstacionamento.Dominio.ModuloCheckout;
+using ControleDeEstacionamento.Dominio.ModuloHospede;
 using ControleDeEstacionamento.Dominio.ModuloTicket;
+using ControleDeEstacionamento.Dominio.ModuloVeiculo;
 
 namespace ControleDeEstacionamento.Dominio.ModuloFaturamento;
 public class Fatura : EntidadeBase<Fatura>
 {
     public Ticket Ticket { get; set; }
-
     public Checkout Checkout { get; set; }
-    public DateTime Placa { get; set; }
     public float ValorMinuto
     {
         get
@@ -19,16 +19,19 @@ public class Fatura : EntidadeBase<Fatura>
 
         set { }
     }
-    public string Cor { get; set; }
-    public float ValorTotal { get; set; }
+
+    public Hospede? Hospede { get; set; }
+    public Veiculo  Veiculo { get; set; }
     public Faturamento Faturamento { get; set; }
+
+    public float ValorTotal { get; set; }
 
     public override void AtualizarRegistro(Fatura registroEditado)
     {
         Ticket = registroEditado.Ticket;
-        Placa = registroEditado.Placa;
         ValorMinuto = registroEditado.ValorMinuto;
-        Cor = registroEditado.Cor;
+        Veiculo = registroEditado.Veiculo;
+        Hospede = registroEditado.Hospede;
     }
 
     public void ObterValorTotal(Checkin checkin, Checkout checkout)

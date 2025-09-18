@@ -4,6 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>fda57c4a-ca67-485b-9eaf-1b2581c65dcf</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -25,6 +26,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\aplicacao\ControleDeEstacionamento.Aplicacao.csproj" />
+    <ProjectReference Include="..\dominio\ControleDeEstacionamento.Dominio.csproj" />
     <ProjectReference Include="..\infraestrutura\orm\ControleDeEstacionamento.Infraestrutura.Orm.csproj" />
   </ItemGroup>
 

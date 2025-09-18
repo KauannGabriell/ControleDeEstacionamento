@@ -25,15 +25,7 @@ namespace ControleDeEstacionamento.Infraestrutura.Orm.ModuloHospede
                         .IsRequired()
                         .HasMaxLength(14);
 
-            builder.HasOne(c => c.Veiculo)
-                .WithOne();
-
-            builder.HasOne(c => c.Ticket)
-                .WithOne();
-
-            builder.HasMany(c => c.Checkins)
-                .WithOne();
-
+            builder.Ignore(c => c.Veiculo);
         }
     }
 }

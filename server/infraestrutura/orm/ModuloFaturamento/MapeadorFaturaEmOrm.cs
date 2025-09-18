@@ -10,29 +10,32 @@ namespace ControleDeEstacionamento.Infraestutura.Orm.ModuloFatura
         {
 
             builder.Property(f => f.Id)
-                   .ValueGeneratedNever()
-                   .IsRequired();
+                      .ValueGeneratedNever()
+                      .IsRequired();
 
-            builder.HasOne(f => f.Ticket)
-                .WithOne();
+            builder.HasOne(f => f.Ticket);
 
-            builder.Property(f => f.Placa)
-                     .IsRequired();
+            builder.HasOne(f => f.Checkout);
 
             builder.Property(f => f.ValorMinuto)
                         .IsRequired();
 
-            builder.Property(f => f.Cor)
-                        .IsRequired();
+
+            builder.HasOne(f => f.Hospede)
+                        .WithMany()
+                        .OnDelete(DeleteBehavior.NoAction);
+
+            builder.HasOne(f => f.Veiculo)
+                        .WithMany()
+                        .OnDelete(DeleteBehavior.NoAction);
+
+
+            builder.HasOne(f => f.Faturamento)
+                        .WithMany(fa => fa.Faturas)
+                        .OnDelete(DeleteBehavior.Cascade);
 
             builder.Property(f => f.ValorTotal)
                         .IsRequired();
-
-            builder.HasOne(f => f.Faturamento)
-                .WithMany();
-
-            builder.HasOne(f => f.Checkout)
-               .WithOne();
         }
     }
 }
