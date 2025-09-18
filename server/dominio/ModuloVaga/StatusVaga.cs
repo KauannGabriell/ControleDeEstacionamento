@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ControleDeEstacionamento.Dominio.ModuloVaga;
 
-public enum Status
+public enum StatusVaga
 {
     [Display(Name = "Disponivel")]
     Disponivel,

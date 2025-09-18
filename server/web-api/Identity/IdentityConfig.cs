@@ -1,10 +1,7 @@
 ﻿using ControleDeEstacionamento.Core.Dominio.ModuloAutenticacao;
 using ControleDeEstacionamento.Infraestrutura.Orm.Compartilhado;
 using ControleDeEstacionamento.WebApi.Identity;
-using eAgenda.Core.Aplicacao.ModuloAutenticacao;
-using eAgenda.Core.Dominio.ModuloAutenticacao;
-using eAgenda.Infraestrutura.Orm.Compartilhado;
-using Microsoft.AspNetCore.Authentication.JwtBearer; // necessária instalação
+using Microsoft.AspNetCore.Authentication.JwtBearer; 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -16,7 +13,6 @@ public static class IdentityConfig
     public static void AddIdentityProviderConfig(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddScoped<ITenantProvider, IdentityTenantProvider>();
-        services.AddScoped<ITokenProvider, AccessTokenProvider>();
 
         services.AddIdentity<Usuario, Cargo>(options =>
         {

@@ -1,5 +1,8 @@
 ﻿using ControleDeEstacionamento.Core.Dominio.Compartilhado;
+using ControleDeEstacionamento.Dominio.ModuloFaturamento;
+using ControleDeEstacionamento.Dominio.ModuloHospede;
 using ControleDeEstacionamento.Dominio.ModuloTicket;
+using ControleDeEstacionamento.Dominio.ModuloVaga;
 using ControleDeEstacionamento.Dominio.ModuloVeiculo;
 
 namespace ControleDeEstacionamento.Dominio.ModuloCheckin;
@@ -13,19 +16,19 @@ public class Checkin : EntidadeBase<Checkin>
         }
     }
     public int UltimoIdTicket { get; set; }
-    Veiculo Veiculo { get; set; }
+    public Veiculo Veiculo { get; set; }
     public DateTime? DataSaida { get; set; }
-    public StatusCheckin Status { get; set }
-
-
+    public StatusCheckin Status { get; set; }
+    public Vaga Vaga { get; set; }
+    public Hospede? Hospede { get; set; }
     public Ticket Ticket
     {
         get
         {
-            return Ticket.GerarTicket(Hospede, DataEntrada, Veiculo, UltimoIdTicket);
+            return Ticket.GerarTicket(Vaga, DataEntrada, Hospede, Veiculo, UltimoIdTicket);
         }
     }
-    public Hospede? Hospede { get; set; }
+
 
     public override void AtualizarRegistro(Checkin registroEditado)
     {
@@ -37,6 +40,7 @@ public class Checkin : EntidadeBase<Checkin>
     public void FinalizarTicket(Checkin checkin)
     {
         checkin.Status = StatusCheckin.Finalizado;
+        checkin.DataSaida = DateTime.Now;
     }
 }
 

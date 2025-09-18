@@ -1,16 +1,24 @@
 ﻿using ControleDeEstacionamento.Core.Dominio.Compartilhado;
+using ControleDeEstacionamento.Dominio.ModuloCheckin;
 
 namespace ControleDeEstacionamento.Dominio.ModuloFaturamento;
 public class Faturamento : EntidadeBase<Faturamento>
 {
-    public DateTime Placa { get; set; }
-    public string ValorDiaria { get; set; }
-    public string Cor { get; set; }
+    public List<Fatura> Faturas { get; set; }
 
+    public float ValorTotal { get; set; }
     public override void AtualizarRegistro(Faturamento registroEditado)
     {
-        Placa = registroEditado.Placa;
-        ValorDiaria = registroEditado.ValorDiaria;
-        Cor = registroEditado.Cor;
+        Faturas = registroEditado.Faturas;
+    }
+
+    public float ObterValorTotal(List<Fatura> Faturas)
+    { 
+        float valorTotal = 0;
+        foreach (var fatura in Faturas)
+        {
+            valorTotal += fatura.ValorTotal;
+        }
+        return valorTotal;
     }
 }
