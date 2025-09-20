@@ -23,8 +23,9 @@ namespace ControleDeEstacionamento.Infraestrutura.Orm.ModuloVaga
 
             builder.HasMany(v => v.Hospedes);
 
-
-            builder.HasOne(v => v.Veiculo);
+            builder.HasOne(v => v.Veiculo)
+                          .WithMany()                    
+                          .IsRequired(false);
         }
     }
 }

@@ -19,7 +19,7 @@ public class VeiculoMappingProfile : Profile
 
         //Queries / Results de Seleção por Id
 
-        
+
 
         // Queries / Results de Selecionar Contatos
         CreateMap<Veiculo, SelecionarVeiculosDto>();

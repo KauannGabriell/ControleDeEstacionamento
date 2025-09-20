@@ -1,26 +1,27 @@
 ﻿using AutoMapper;
 using ControleDeEstacionamento.Core.Aplicacao.Compartilhado;
+using ControleDeEstacionamento.Core.Aplicacao.ModuloVaga.Commands;
 using ControleDeEstacionamento.Core.Aplicacao.ModuloVeiculo.Commands;
 using ControleDeEstacionamento.Core.Dominio.Compartilhado;
-using ControleDeEstacionamento.Core.Dominio.ModuloVeiculo;
-using ControleDeEstacionamento.Dominio.ModuloVeiculo;
+using ControleDeEstacionamento.Core.Dominio.ModuloVaga;
+using ControleDeEstacionamento.Dominio.ModuloVaga;
 using FluentResults;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace ControleDeEstacionamento.Core.Aplicacao.ModuloVeiculo.Cadastrar;
+namespace ControleDeEstacionamento.Core.Aplicacao.ModuloVaga.Cadastrar;
 
 public class CadastrarVagaCommandHandler(
-    IValidator<CadastrarVeiculoCommand> validator,  
+    IValidator<CadastrarVagaCommand> validator,  
     IMapper mapper,
-    IRepositorioVeiculo repositorioVeiculo,
+    IRepositorioVaga repositorioVaga,
     ILogger<CadastrarVagaCommandHandler> logger,
     IUnitOfWork unitOfWork
-) : IRequestHandler<CadastrarVeiculoCommand, Result<CadastrarVeiculoResult>>
+) : IRequestHandler<CadastrarVagaCommand, Result<CadastrarVagaResult>>
 
 {  
-    public async Task<Result<CadastrarVeiculoResult>> Handle(CadastrarVeiculoCommand command, CancellationToken cancellationToken)
+    public async Task<Result<CadastrarVagaResult>> Handle(CadastrarVagaCommand command, CancellationToken cancellationToken)
     {
         var resultadoValidacao = await validator.ValidateAsync(command);
 
@@ -31,18 +32,21 @@ public class CadastrarVagaCommandHandler(
 
             return Result.Fail(erroFormatado);
         }
-        var registros = await repositorioVeiculo.SelecionarRegistrosAsync();
+        var registros = await repositorioVaga.SelecionarRegistrosAsync();
 
         try
         {
           
-            var veiculo = mapper.Map<Veiculo>(command);
+            var vaga = mapper.Map<Vaga>(command);
 
-            await repositorioVeiculo.CadastrarAsync(veiculo);
+            var vagas = vaga.ObtendoVagasPorZona(command.quantidade, command.zona);
+
+            await repositorioVaga.CadastrarEntidadesAsync(vagas);
 
             await unitOfWork.CommitAsync();
 
-            var result = mapper.Map<CadastrarVeiculoResult>(veiculo);
+            var result = new CadastrarVagaResult(idsVagas: vagas.Select(v => v.Id).ToList());
+
             return Result.Ok(result);
 
 
@@ -51,7 +55,7 @@ public class CadastrarVagaCommandHandler(
         {
             await unitOfWork.RollbackAsync();
 
-            logger.LogError(ex, "Erro ao cadastrar veiculo {Modelo}", command.Modelo);
+            logger.LogError(ex, "Erro ao cadastrar vaga {Vaga}", command.zona);
 
             return Result.Fail(ResultadosErro.ExcecaoInternaErro(ex));
         }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ControleDeEstacionamento.Core.Aplicacao.ModuloContato.Commands;
+using ControleDeEstacionamento.Core.Aplicacao.ModuloVaga.Commands;
 using ControleDeEstacionamento.Core.Aplicacao.ModuloVeiculo.Commands;
 using ControleDeEstacionamento.Models.ModuloVeiculo;
 using ControleDeEstacionamento.WebApi.Models.ModuloVeiculo;

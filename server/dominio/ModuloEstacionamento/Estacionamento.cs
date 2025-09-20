@@ -10,27 +10,13 @@ public class Estacionamento : EntidadeBase<Estacionamento>
 
     [NotMapped]
     public List<Vaga> VagasOCupadas { get; set; }
-    public List<Vaga> ObtendoVagasPorZona(int numeroVagasZona, char zona)
-    {
 
-        Vagas = new List<Vaga>();
-        for (int i = 0; i < numeroVagasZona; i++)
-        {
-            Vagas.Add(new Vaga
-            {
-                Zona = zona,
-                Status = StatusVaga.Disponivel,
-                IdentificadorVaga = GeradorIdentificadorVaga.CriarGuidString()
-            });
-        }
-        return Vagas;
-    }
 
     public Estacionamento() { }
 
     public Estacionamento(List<Vaga> vagas, List<Vaga> vagasOCupadas)
     {
-        Id = new Guid();
+        Id = Guid.NewGuid();
         Vagas = vagas;
         VagasOCupadas = vagasOCupadas;
     }

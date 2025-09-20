@@ -23,7 +23,6 @@
     <Folder Include="Models\ModuloFaturamento\" />
     <Folder Include="Models\ModuloEstacionamento\" />
     <Folder Include="Models\ModuloAutenticacao\" />
-    <Folder Include="Models\ModuloVaga\" />
     <Folder Include="Models\ModuloTicket\" />
     <Folder Include="Models\ModuloCheckout\" />
     <Folder Include="Models\ModuloHospede\" />

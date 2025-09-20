@@ -22,8 +22,6 @@
     <Folder Include="ModuloRastreamento\Handlers\" />
     <Folder Include="ModuloTicket\Commands\" />
     <Folder Include="ModuloTicket\Handlers\" />
-    <Folder Include="ModuloVaga\Commands\" />
-    <Folder Include="ModuloVaga\Handlers\" />
   </ItemGroup>
 
   <ItemGroup>

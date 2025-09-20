@@ -1,6 +1,8 @@
 ﻿using ControleDeEstacionamento.Core.Dominio.Compartilhado;
+using ControleDeEstacionamento.Core.Dominio.ModuloVaga;
 using ControleDeEstacionamento.Core.Dominio.ModuloVeiculo;
 using ControleDeEstacionamento.Infraestrutura.Orm.Compartilhado;
+using ControleDeEstacionamento.Infraestrutura.Orm.ModuloVaga;
 using ControleDeEstacionamento.Infraestrutura.Orm.ModuloVeiculo;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -12,6 +14,7 @@ public static class DependencyInjection
     public static IServiceCollection AddCamadaInfraestruturaOrm(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddScoped<IRepositorioVeiculo, RepositorioVeiculoEmOrm>();
+        services.AddScoped<IRepositorioVaga, RepositorioVagaEmOrm>();
 
         services.AddEntityFrameworkConfig(configuration);
 

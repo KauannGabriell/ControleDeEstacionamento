@@ -28,7 +28,7 @@ public class Fatura : EntidadeBase<Fatura>
 
     public Fatura (Ticket ticket, Checkout checkout, float valorMinuto, Hospede hospede, Veiculo veiculo, Faturamento faturamento, float valorTotal)
     {
-        Id = new Guid();
+        Id = Guid.NewGuid();
         Ticket = ticket;
         Checkout = checkout;
         ValorMinuto = valorMinuto;

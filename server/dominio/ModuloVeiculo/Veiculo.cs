@@ -1,9 +1,4 @@
 ﻿using ControleDeEstacionamento.Core.Dominio.Compartilhado;
-using ControleDeEstacionamento.Core.Dominio.ModuloAutenticacao;
-using ControleDeEstacionamento.Dominio.ModuloCheckin;
-using ControleDeEstacionamento.Dominio.ModuloHospede;
-using ControleDeEstacionamento.Dominio.ModuloTicket;
-using ControleDeEstacionamento.Dominio.ModuloVaga;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ControleDeEstacionamento.Dominio.ModuloVeiculo;

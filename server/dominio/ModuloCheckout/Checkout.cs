@@ -28,7 +28,7 @@ public class Checkout  : EntidadeBase<Checkout>
 
     public Checkout(DateTime dataSaida, Ticket ticket, Fatura? fatura)
     {
-        Id = new Guid();
+        Id = Guid.NewGuid();
         DataSaida = dataSaida;
         Ticket = ticket;
         Fatura = fatura;

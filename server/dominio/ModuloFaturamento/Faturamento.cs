@@ -12,7 +12,7 @@ public class Faturamento : EntidadeBase<Faturamento>
 
     public Faturamento(List<Fatura> faturas,  float valorTotal)
     {
-        Id = new Guid();
+        Id = Guid.NewGuid();
         Faturas = faturas;
         ValorTotal = valorTotal;
     }

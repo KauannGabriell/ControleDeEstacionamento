@@ -21,7 +21,7 @@ public class Hospede : EntidadeBase<Hospede>
 
     public Hospede(string nome, string telefone, string cpf)
     {
-        Id = new Guid();
+        Id = Guid.NewGuid();
         Nome = nome;
         Telefone = telefone;
         Cpf = cpf;

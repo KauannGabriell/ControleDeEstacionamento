@@ -30,7 +30,7 @@ public class Checkin : EntidadeBase<Checkin>
 
     public Checkin(DateTime dataEntrada, int ultimoIdTicket, Veiculo veiculo, DateTime? dataSaida, StatusCheckin status, Vaga vaga, Hospede? hospede, Ticket ticket)
     {
-        Id = new Guid();
+        Id = Guid.NewGuid();
         DataEntrada = dataEntrada;
         UltimoIdTicket = ultimoIdTicket;
         Veiculo = veiculo;
