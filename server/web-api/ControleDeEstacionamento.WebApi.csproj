@@ -21,8 +21,12 @@
   <ItemGroup>
     <Folder Include="Models\ModuloCheckin\" />
     <Folder Include="Models\ModuloFaturamento\" />
-    <Folder Include="Models\ModuloRastreamento\" />
+    <Folder Include="Models\ModuloEstacionamento\" />
     <Folder Include="Models\ModuloAutenticacao\" />
+    <Folder Include="Models\ModuloVaga\" />
+    <Folder Include="Models\ModuloTicket\" />
+    <Folder Include="Models\ModuloCheckout\" />
+    <Folder Include="Models\ModuloHospede\" />
   </ItemGroup>
 
   <ItemGroup>

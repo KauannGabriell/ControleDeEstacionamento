@@ -5,7 +5,7 @@ namespace ControleDeEstacionamento.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RastreamentoController : ControllerBase
+    public class CheckinController : ControllerBase
     {
     }
 }

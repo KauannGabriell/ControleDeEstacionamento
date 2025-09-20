@@ -9,10 +9,21 @@
   <ItemGroup>
     <Folder Include="ModuloCheckin\Commands\" />
     <Folder Include="ModuloCheckin\Handlers\" />
-    <Folder Include="ModuloFaturamento\Commands\" />
-    <Folder Include="ModuloFaturamento\Handlers\" />
+    <Folder Include="ModuloCheckout\Commands\" />
+    <Folder Include="ModuloCheckout\Handlers\" />
+    <Folder Include="ModuloFaturamento\Faturamento\Commands\" />
+    <Folder Include="ModuloFaturamento\Faturamento\Handlers\" />
+    <Folder Include="ModuloFaturamento\Fatura\Commands\" />
+    <Folder Include="ModuloFaturamento\Fatura\Handlers\" />
+    <Folder Include="ModuloFaturamento\Fatura\" />
+    <Folder Include="ModuloHospede\Commands\" />
+    <Folder Include="ModuloHospede\Handlers\" />
     <Folder Include="ModuloRastreamento\Commands\" />
     <Folder Include="ModuloRastreamento\Handlers\" />
+    <Folder Include="ModuloTicket\Commands\" />
+    <Folder Include="ModuloTicket\Handlers\" />
+    <Folder Include="ModuloVaga\Commands\" />
+    <Folder Include="ModuloVaga\Handlers\" />
   </ItemGroup>
 
   <ItemGroup>

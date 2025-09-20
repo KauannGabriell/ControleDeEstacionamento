@@ -1,0 +1,54 @@
+﻿
+
+using AutoMapper;
+using eAgenda.Core.Aplicacao.Compartilhado;
+using eAgenda.Core.Aplicacao.ModuloContato.Commands;
+using eAgenda.Core.Dominio.Compartilhado;
+using eAgenda.Core.Dominio.ModuloContato;
+using FluentResults;
+using MediatR;
+using Microsoft.Extensions.Logging;
+
+namespace eAgenda.Core.Aplicacao.ModuloContato.Handlers;
+
+public class EditarVeiculoCommandHandler(
+    IMapper mapper,
+    IRepositorioContato repositorioContato,
+    IUnitOfWork unitOfWork,
+    ILogger<EditarVeiculoCommandHandler> logger
+    ) : IRequestHandler<EditarContatoCommand, Result<EditarContatoResult>>
+
+{
+    public async Task<Result<EditarContatoResult>> Handle(EditarContatoCommand command, CancellationToken cancellationToken)
+    {
+
+        var registros = await repositorioContato.SelecionarRegistrosAsync();
+
+        if (registros.Any(x => x.Id.Equals(command.Id) &&  x.Nome == command.Nome))
+            return Result.Fail(ResultadosErro.RegistroDuplicadoErro("Já existe um contato com esse nome"));
+
+        try
+        {
+           
+            var contatoEditado = mapper.Map<Contato>(command);
+
+            await repositorioContato.EditarAsync(command.Id, contatoEditado);
+
+            await unitOfWork.CommitAsync();
+
+            var result = mapper.Map<EditarContatoResult>(contatoEditado);
+            return Result.Ok(result);
+        }
+        catch (Exception ex)
+        {
+            await unitOfWork.RollbackAsync();
+
+            logger.LogError(ex, "Ocorreu um erro durante a edição do {@Registro}"
+                ,command.Nome);
+
+            return Result.Fail(ResultadosErro.ExcecaoInternaErro(ex));
+        }
+
+    }
+}
+
