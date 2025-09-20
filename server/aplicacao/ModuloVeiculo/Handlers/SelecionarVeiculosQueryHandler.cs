@@ -1,33 +1,29 @@
 ﻿using AutoMapper;
-using eAgenda.Core.Aplicacao.Compartilhado;
-using eAgenda.Core.Aplicacao.ModuloContato.Commands;
-using eAgenda.Core.Dominio.ModuloContato;
+using ControleDeEstacionamento.Core.Aplicacao.Compartilhado;
+using ControleDeEstacionamento.Core.Aplicacao.ModuloContato.Commands;
+using ControleDeEstacionamento.Core.Dominio.ModuloVeiculo;
 using FluentResults;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using System.Collections.Immutable;
 
-namespace eAgenda.Core.Aplicacao.ModuloContato.Handlers;
+namespace ControleDeEstacionamento.Core.Aplicacao.ModuloContato.Handlers;
 public class SelecionarVeiculosQueryHandler(
     IMapper mapper,
-    IRepositorioContato repositorioContato,
+    IRepositorioVeiculo repositorioVeiculo,
     ILogger<SelecionarVeiculosQueryHandler> logger
-    ) : IRequestHandler<SelecionarContatosQuery, Result<SelecionarContatosResult>>
+    ) : IRequestHandler<SelecionarVeiculosQuery, Result<SelecionarVeiculosResult>>
 {
     
 
-    public async Task<Result<SelecionarContatosResult>> Handle(SelecionarContatosQuery query, CancellationToken cancellationToken)
+    public async Task<Result<SelecionarVeiculosResult>> Handle(SelecionarVeiculosQuery query, CancellationToken cancellationToken)
     {
-       
-
-
         try
         {
             var registros = query.Quantidade.HasValue  
-                ? await repositorioContato.SelecionarRegistrosAsync(query.Quantidade.Value)
-                : await repositorioContato.SelecionarRegistrosAsync();
+                ? await repositorioVeiculo.SelecionarRegistrosAsync(query.Quantidade.Value)
+                : await repositorioVeiculo.SelecionarRegistrosAsync();
 
-            var result = mapper.Map<SelecionarContatosResult>(registros);
+            var result = mapper.Map<SelecionarVeiculosResult>(registros);
             return Result.Ok(result);
         }
         catch (Exception ex)

@@ -1,14 +1,15 @@
-﻿using eAgenda.Core.Aplicacao.ModuloContato.Cadastrar;
-using FluentResults;
+﻿using FluentResults;
 using MediatR;
-using StackExchange.Redis;
 
 
 namespace ControleDeEstacionamento.Core.Aplicacao.ModuloVeiculo.Commands;
 
 public record CadastrarVeiculoCommand(
- 
-) : IRequest<Result<CadastrarContatoResult>>;
+     string Placa,
+     string Modelo,
+     string Cor
+
+) : IRequest<Result<CadastrarVeiculoResult>>;
 
 
-public record CadastrarContatoResult(Guid Id);
+public record CadastrarVeiculoResult(Guid Id);

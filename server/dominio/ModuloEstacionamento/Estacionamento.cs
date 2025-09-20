@@ -26,6 +26,15 @@ public class Estacionamento : EntidadeBase<Estacionamento>
         return Vagas;
     }
 
+    public Estacionamento() { }
+
+    public Estacionamento(List<Vaga> vagas, List<Vaga> vagasOCupadas)
+    {
+        Id = new Guid();
+        Vagas = vagas;
+        VagasOCupadas = vagasOCupadas;
+    }
+
     public override void AtualizarRegistro(Estacionamento registroEditado)
     {
         

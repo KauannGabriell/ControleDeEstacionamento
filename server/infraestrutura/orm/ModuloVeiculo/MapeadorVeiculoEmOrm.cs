@@ -22,7 +22,6 @@ namespace ControleDeEstacionamento.Infraestrutura.Orm.ModuloVaga
             builder.Property(v => v.Cor)
               .IsRequired();
 
-            builder.HasOne(c => c.Hospede);
         }
     }
 }

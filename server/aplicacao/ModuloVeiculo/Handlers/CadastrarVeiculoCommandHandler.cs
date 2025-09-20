@@ -1,25 +1,26 @@
 ﻿using AutoMapper;
-using eAgenda.Core.Aplicacao.Compartilhado;
-using eAgenda.Core.Dominio.Compartilhado;
-using eAgenda.Core.Dominio.ModuloContato;
+using ControleDeEstacionamento.Core.Aplicacao.Compartilhado;
+using ControleDeEstacionamento.Core.Aplicacao.ModuloVeiculo.Commands;
+using ControleDeEstacionamento.Core.Dominio.Compartilhado;
+using ControleDeEstacionamento.Core.Dominio.ModuloVeiculo;
+using ControleDeEstacionamento.Dominio.ModuloVeiculo;
 using FluentResults;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using System.Linq.Expressions;
 
-namespace eAgenda.Core.Aplicacao.ModuloContato.Cadastrar;
+namespace ControleDeEstacionamento.Core.Aplicacao.ModuloVeiculo.Cadastrar;
 
 public class CadastrarVeiculoCommandHandler(
-    IValidator<CadastrarContatoCommand> validator,  
+    IValidator<CadastrarVeiculoCommand> validator,  
     IMapper mapper,
-    IRepositorioContato repositorioContato,
+    IRepositorioVeiculo repositorioVeiculo,
     ILogger<CadastrarVeiculoCommandHandler> logger,
     IUnitOfWork unitOfWork
-) : IRequestHandler<CadastrarContatoCommand, Result<CadastrarContatoResult>>
+) : IRequestHandler<CadastrarVeiculoCommand, Result<CadastrarVeiculoResult>>
 
 {  
-    public async Task<Result<CadastrarContatoResult>> Handle(CadastrarContatoCommand command, CancellationToken cancellationToken)
+    public async Task<Result<CadastrarVeiculoResult>> Handle(CadastrarVeiculoCommand command, CancellationToken cancellationToken)
     {
         var resultadoValidacao = await validator.ValidateAsync(command);
 
@@ -30,22 +31,18 @@ public class CadastrarVeiculoCommandHandler(
 
             return Result.Fail(erroFormatado);
         }
-        var registros = await repositorioContato.SelecionarRegistrosAsync();
-
-        if (registros.Any(x => x.Nome == command.Nome))
-            return Result.Fail(ResultadosErro.RegistroDuplicadoErro("Já existe um contato com esse nome"));
-
+        var registros = await repositorioVeiculo.SelecionarRegistrosAsync();
 
         try
         {
           
-            var contato = mapper.Map<Contato>(command);
+            var contato = mapper.Map<Veiculo>(command);
 
-            await repositorioContato.CadastrarAsync(contato);
+            await repositorioVeiculo.CadastrarAsync(contato);
 
             await unitOfWork.CommitAsync();
 
-            var result = mapper.Map<CadastrarContatoResult>(contato);
+            var result = mapper.Map<CadastrarVeiculoResult>(contato);
             return Result.Ok(result);
 
 
@@ -54,7 +51,7 @@ public class CadastrarVeiculoCommandHandler(
         {
             await unitOfWork.RollbackAsync();
 
-            logger.LogError(ex, "Erro ao cadastrar contato {Nome}", command.Nome);
+            logger.LogError(ex, "Erro ao cadastrar veiculo {Modelo}", command.Modelo);
 
             return Result.Fail(ResultadosErro.ExcecaoInternaErro(ex));
         }

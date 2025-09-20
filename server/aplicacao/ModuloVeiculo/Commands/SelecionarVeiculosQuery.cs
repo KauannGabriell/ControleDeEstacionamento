@@ -2,16 +2,17 @@
 using MediatR;
 using System.Collections.Immutable;
 
-namespace eAgenda.Core.Aplicacao.ModuloContato.Commands;
+namespace ControleDeEstacionamento.Core.Aplicacao.ModuloContato.Commands;
 
-public record SelecionarVeiculosQuery(int? Quantidade) : IRequest<Result<SelecionarContatosResult>>;
+public record SelecionarVeiculosQuery(int? Quantidade) : IRequest<Result<SelecionarVeiculosResult>>;
 
-public record SelecionarContatosResult(ImmutableList<SelecionarContatosDto> Contatos);
+public record SelecionarVeiculosResult(ImmutableList<SelecionarVeiculosDto> Veiculos);
 
-public record SelecionarContatosDto(
+public record SelecionarVeiculosDto(
     Guid Id,
-    string Nome,
-    string Email,
-    string Telefone,
-    string Empresa,
-    string Cargo);
+    string Placa,
+    string Modelo,
+    string Cor
+    );
+    
+

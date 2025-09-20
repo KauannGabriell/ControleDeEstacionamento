@@ -24,6 +24,16 @@ public class Checkout  : EntidadeBase<Checkout>
     [NotMapped]
     public Fatura? Fatura { get; set; }
 
+    public Checkout () { }
+
+    public Checkout(DateTime dataSaida, Ticket ticket, Fatura? fatura)
+    {
+        Id = new Guid();
+        DataSaida = dataSaida;
+        Ticket = ticket;
+        Fatura = fatura;
+    }
+
     public void FinalizarCheckin(Ticket ticket, Checkin checkin)
     {
         checkin.Status = StatusCheckin.Finalizado;

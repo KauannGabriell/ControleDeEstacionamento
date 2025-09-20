@@ -1,4 +1,5 @@
-﻿using System.Collections.Immutable;
+﻿using ControleDeEstacionamento.Core.Aplicacao.ModuloContato.Commands;
+using System.Collections.Immutable;
 
 namespace ControleDeEstacionamento.Models.ModuloVeiculo;
 public record SelecionarVeiculosRequest(int? Quantidade);

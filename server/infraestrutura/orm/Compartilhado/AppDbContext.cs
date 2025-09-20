@@ -2,9 +2,9 @@
 using ControleDeEstacionamento.Core.Dominio.ModuloAutenticacao;
 using ControleDeEstacionamento.Dominio.ModuloCheckin;
 using ControleDeEstacionamento.Dominio.ModuloCheckout;
+using ControleDeEstacionamento.Dominio.ModuloEstacionamento;
 using ControleDeEstacionamento.Dominio.ModuloFaturamento;
 using ControleDeEstacionamento.Dominio.ModuloHospede;
-using ControleDeEstacionamento.Dominio.ModuloRastreamento;
 using ControleDeEstacionamento.Dominio.ModuloTicket;
 using ControleDeEstacionamento.Dominio.ModuloVaga;
 using ControleDeEstacionamento.Dominio.ModuloVeiculo;
@@ -23,7 +23,6 @@ public class AppDbContext(DbContextOptions options) : IdentityDbContext<Usuario,
     public DbSet<Faturamento> Faturamentos { get; set; }
     public DbSet<Ticket> Tickets { get; set; }
     public DbSet<Hospede> Hospedes { get; set; }
-
     public DbSet<Estacionamento> Estacionamentos { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

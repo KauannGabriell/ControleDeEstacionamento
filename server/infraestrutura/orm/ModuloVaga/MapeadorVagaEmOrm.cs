@@ -23,10 +23,8 @@ namespace ControleDeEstacionamento.Infraestrutura.Orm.ModuloVaga
 
             builder.HasMany(v => v.Hospedes);
 
-            builder.HasOne(v => v.Veiculo)
-                    .WithMany(ve => ve.Vagas)
-                    .HasForeignKey("VeiculoId");
 
+            builder.HasOne(v => v.Veiculo);
         }
     }
 }

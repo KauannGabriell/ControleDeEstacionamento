@@ -23,9 +23,19 @@ public class Fatura : EntidadeBase<Fatura>
     public Hospede? Hospede { get; set; }
     public Veiculo  Veiculo { get; set; }
     public Faturamento Faturamento { get; set; }
-
     public float ValorTotal { get; set; }
+    public Fatura () { }
 
+    public Fatura (Ticket ticket, Checkout checkout, float valorMinuto, Hospede hospede, Veiculo veiculo, Faturamento faturamento, float valorTotal)
+    {
+        Id = new Guid();
+        Ticket = ticket;
+        Checkout = checkout;
+        ValorMinuto = valorMinuto;
+        Hospede = hospede;
+        Veiculo = veiculo;
+        Faturamento = faturamento;
+    }
     public override void AtualizarRegistro(Fatura registroEditado)
     {
         Ticket = registroEditado.Ticket;

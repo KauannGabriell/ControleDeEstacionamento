@@ -26,7 +26,21 @@ public class Checkin : EntidadeBase<Checkin>
     public Vaga Vaga { get; set; }
     public Hospede? Hospede { get; set; }
     public Ticket Ticket { get; set;}
+    public Checkin () { }
 
+    public Checkin(DateTime dataEntrada, int ultimoIdTicket, Veiculo veiculo, DateTime? dataSaida, StatusCheckin status, Vaga vaga, Hospede? hospede, Ticket ticket)
+    {
+        Id = new Guid();
+        DataEntrada = dataEntrada;
+        UltimoIdTicket = ultimoIdTicket;
+        Veiculo = veiculo;
+        DataSaida = dataSaida;
+        Status = status;
+        Vaga = vaga;
+        Hospede = hospede;
+        Ticket = ticket;
+    }
+    
     public override void AtualizarRegistro(Checkin registroEditado)
     {
         Veiculo = registroEditado.Veiculo;

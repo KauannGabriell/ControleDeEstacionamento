@@ -1,6 +1,7 @@
 ﻿using ControleDeEstacionamento.Core.Dominio.Compartilhado;
 using ControleDeEstacionamento.Dominio.ModuloCheckin;
 using ControleDeEstacionamento.Dominio.ModuloCheckout;
+using ControleDeEstacionamento.Dominio.ModuloEstacionamento;
 using ControleDeEstacionamento.Dominio.ModuloFaturamento;
 using ControleDeEstacionamento.Dominio.ModuloHospede;
 using ControleDeEstacionamento.Dominio.ModuloVaga;
@@ -24,6 +25,21 @@ public class Ticket : EntidadeBase<Ticket>
 
     [NotMapped]
     public Checkin Checkin { get; set; }
+
+    public Ticket() { }
+
+    public Ticket(Veiculo veiculo, int identificadorUnicoSequencial, Hospede hospede, DateTime dataEntrada, Vaga vaga, StatusCheckin status, Fatura? fatura, Checkin checkin)
+    {
+        Id = Guid.NewGuid();
+        Veiculo = veiculo;
+        IdentificadorUnicoSequencial = identificadorUnicoSequencial;
+        Hospede = hospede;
+        DataEntrada = dataEntrada;
+        Vaga = vaga;
+        Status = status;
+        Fatura = fatura;
+        Checkin = checkin;
+    }
     public override void AtualizarRegistro(Ticket registroEditado)
     {
         Fatura = registroEditado.Fatura;

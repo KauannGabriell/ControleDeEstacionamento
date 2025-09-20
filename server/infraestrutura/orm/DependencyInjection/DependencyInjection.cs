@@ -1,5 +1,7 @@
 ﻿using ControleDeEstacionamento.Core.Dominio.Compartilhado;
+using ControleDeEstacionamento.Core.Dominio.ModuloVeiculo;
 using ControleDeEstacionamento.Infraestrutura.Orm.Compartilhado;
+using ControleDeEstacionamento.Infraestrutura.Orm.ModuloVeiculo;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,6 +11,7 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddCamadaInfraestruturaOrm(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddScoped<IRepositorioVeiculo, RepositorioVeiculoEmOrm>();
 
         services.AddEntityFrameworkConfig(configuration);
 

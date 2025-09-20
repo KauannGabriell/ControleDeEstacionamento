@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using ControleDeEstacionamento.Core.Aplicacao.ModuloContato.Commands;
+using ControleDeEstacionamento.Core.Aplicacao.ModuloVeiculo.Commands;
 using ControleDeEstacionamento.Models.ModuloVeiculo;
 using ControleDeEstacionamento.WebApi.Models.ModuloVeiculo;
 using FluentResults;
@@ -25,7 +27,7 @@ public class VeiculoController(IMediator mediator, IMapper mapper) : ControllerB
         if (result.IsFailed)
             return BadRequest();
 
-        var response = mapper.Map<SelecionarContatosResponse>(result.Value);
+        var response = mapper.Map<SelecionarVeiculosResponse>(result.Value);
 
         return Ok(response);
     }
@@ -48,14 +50,12 @@ public class VeiculoController(IMediator mediator, IMapper mapper) : ControllerB
                 return BadRequest(errosDeValidacao);
             }
 
-            // Http 500 é o erro genérico do servidor
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
 
 
         var response = mapper.Map<CadastrarVeiculoResponse>(result.Value);
 
-        //Estado http 201
         return Created(string.Empty, response);
     }
 
