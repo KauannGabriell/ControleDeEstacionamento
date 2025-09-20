@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ControleDeEstacionamento.Core.Dominio.ModuloTicket;
+using ControleDeEstacionamento.Dominio.ModuloTicket;
+using ControleDeEstacionamento.Infraestrutura.Orm.Compartilhado;
 
-namespace ControleDeEstacionamento.Infraestrutura.Orm.ModuloTicket
-{
-    internal class RepositorioTicketEmOrm
-    {
-    }
-}
+namespace ControleDeEstacionamento.Infraestrutura.Orm.ModuloTicket;
+
+public class RepositorioTicketEmOrm(AppDbContext contexto)
+    : RepositorioBaseEmOrm<Ticket>(contexto), IRepositorioTicket;

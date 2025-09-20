@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ControleDeEstacionamento.Core.Dominio.ModuloVaga;
+using ControleDeEstacionamento.Dominio.ModuloVaga;
+using ControleDeEstacionamento.Infraestrutura.Orm.Compartilhado;
 
-namespace ControleDeEstacionamento.Infraestrutura.Orm.ModuloVaga
-{
-    internal class RepositorioVagaEmOrm
-    {
-    }
-}
+namespace ControleDeEstacionamento.Infraestrutura.Orm.ModuloVaga;
+
+public class RepositorioVagaEmOrm(AppDbContext contexto)
+    : RepositorioBaseEmOrm<Vaga>(contexto), IRepositorioVaga;

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ControleDeEstacionamento.Core.Dominio.ModuloCheckin;
+using ControleDeEstacionamento.Dominio.ModuloCheckin;
+using ControleDeEstacionamento.Infraestrutura.Orm.Compartilhado;
 
-namespace ControleDeEstacionamento.Infraestrutura.Orm.ModuloCheckin
-{
-    internal class RepositorioCheckinEmOrm
-    {
-    }
-}
+namespace ControleDeEstacionamento.Infraestrutura.Orm.ModuloCheckin;
+
+public class RepositorioCheckinEmOrm(AppDbContext contexto)
+    : RepositorioBaseEmOrm<Checkin>(contexto), IRepositorioCheckin;

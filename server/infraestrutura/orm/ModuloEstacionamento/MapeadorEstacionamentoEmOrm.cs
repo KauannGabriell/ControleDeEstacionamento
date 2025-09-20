@@ -1,5 +1,5 @@
-﻿using ControleDeEstacionamento.Dominio.ModuloFaturamento;
-using ControleDeEstacionamento.Dominio.ModuloRastreamento;
+﻿using ControleDeEstacionamento.Dominio.ModuloEstacionamento;
+using ControleDeEstacionamento.Dominio.ModuloFaturamento;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

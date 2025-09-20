@@ -1,11 +1,9 @@
 ﻿
 using ControleDeEstacionamento.Core.Dominio.Compartilhado;
 using ControleDeEstacionamento.Dominio.ModuloVaga;
-using ControleDeEstacionamento.Dominio.ModuloVeiculo;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ControleDeEstacionamento.Dominio.ModuloRastreamento;
+namespace ControleDeEstacionamento.Dominio.ModuloEstacionamento;
 public class Estacionamento : EntidadeBase<Estacionamento>
 {
     public List<Vaga> Vagas { get; set; }
