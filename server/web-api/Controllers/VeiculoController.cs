@@ -59,6 +59,18 @@ public class VeiculoController(IMediator mediator, IMapper mapper) : ControllerB
         return Created(string.Empty, response);
     }
 
+    [HttpDelete("{id:guid}")]
+    public async Task<ActionResult<ExcluirVeiculoResponse>> Excluir(Guid id)
+    {
+        var command = mapper.Map<ExcluirVeiculoCommand>(id);
+
+        var result = await mediator.Send(command);
+
+        if (result.IsFailed)
+            return BadRequest();
+
+        return NoContent();
+    }
 }
 
 

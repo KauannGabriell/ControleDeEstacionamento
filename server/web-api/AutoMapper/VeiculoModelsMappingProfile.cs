@@ -21,5 +21,9 @@ public class VeiculoModelsMappingProfile : Profile
                 src?.Veiculos.Select(c => ctx.Mapper.Map<SelecionarVeiculosDto>(c)).ToImmutableList() ?? ImmutableList<SelecionarVeiculosDto>.Empty
                 ));
 
+
+        CreateMap<Guid, ExcluirVeiculoCommand>()
+            .ConstructUsing(src => new ExcluirVeiculoCommand(src));
+
     }
 }

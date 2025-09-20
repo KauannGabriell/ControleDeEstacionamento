@@ -36,13 +36,13 @@ public class CadastrarVeiculoCommandHandler(
         try
         {
           
-            var contato = mapper.Map<Veiculo>(command);
+            var veiculo = mapper.Map<Veiculo>(command);
 
-            await repositorioVeiculo.CadastrarAsync(contato);
+            await repositorioVeiculo.CadastrarAsync(veiculo);
 
             await unitOfWork.CommitAsync();
 
-            var result = mapper.Map<CadastrarVeiculoResult>(contato);
+            var result = mapper.Map<CadastrarVeiculoResult>(veiculo);
             return Result.Ok(result);
 
 
