@@ -1,7 +1,5 @@
-﻿using AutoMapper;
-using ControleDeEstacionamento.Core.Aplicacao.Compartilhado;
+﻿using ControleDeEstacionamento.Core.Aplicacao.Compartilhado;
 using ControleDeEstacionamento.Core.Aplicacao.ModuloCheckin.Commands;
-using ControleDeEstacionamento.Core.Aplicacao.ModuloVeiculo.Commands;
 using ControleDeEstacionamento.Core.Dominio.Compartilhado;
 using ControleDeEstacionamento.Core.Dominio.ModuloCheckin;
 using ControleDeEstacionamento.Core.Dominio.ModuloHospede;
@@ -11,112 +9,97 @@ using ControleDeEstacionamento.Core.Dominio.ModuloVeiculo;
 using ControleDeEstacionamento.Dominio.ModuloCheckin;
 using ControleDeEstacionamento.Dominio.ModuloHospede;
 using ControleDeEstacionamento.Dominio.ModuloTicket;
-using ControleDeEstacionamento.Dominio.ModuloVaga;
-using ControleDeEstacionamento.Dominio.ModuloVeiculo;
 using FluentResults;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace ControleDeEstacionamento.Core.Aplicacao.ModuloCheckin.Cadastrar;
-
-public class RealizarCheckinCommandHandler(
-    IValidator<RealizarCheckinCommand> validator,
-    IMapper mapper,
-    IRepositorioCheckin repositorioCheckin,
-    IRepositorioTicket repositorioTicket,
-    IRepositorioVeiculo repositorioVeiculo,
-    IRepositorioHospede repositorioHospede,
-    IRepositorioVaga repositorioVaga,
-    ILogger<RealizarCheckinCommandHandler> logger,
-    IUnitOfWork unitOfWork
-) : IRequestHandler<RealizarCheckinCommand, Result<RealizarCheckinResult>>
-
+namespace ControleDeEstacionamento.Core.Aplicacao.ModuloCheckin.Cadastrar
 {
-    public async Task<Result<RealizarCheckinResult>> Handle(RealizarCheckinCommand command, CancellationToken cancellationToken)
+    public class RealizarCheckinCommandHandler(
+        IValidator<RealizarCheckinCommand> validator,
+        IRepositorioCheckin repositorioCheckin,
+        IRepositorioTicket repositorioTicket,
+        IRepositorioVeiculo repositorioVeiculo,
+        IRepositorioHospede repositorioHospede,
+        IRepositorioVaga repositorioVaga,
+        ILogger<RealizarCheckinCommandHandler> logger,
+        IUnitOfWork unitOfWork
+    ) : IRequestHandler<RealizarCheckinCommand, Result<RealizarCheckinResult>>
     {
-        var resultadoValidacao = await validator.ValidateAsync(command);
-
-        if (!resultadoValidacao.IsValid)
+        public async Task<Result<RealizarCheckinResult>> Handle(RealizarCheckinCommand command, CancellationToken cancellationToken)
         {
-            var erros = resultadoValidacao.Errors.Select(e => e.ErrorMessage);
-            var erroFormatado = ResultadosErro.RequisicaoInvalidaErro(erros);
-
-            return Result.Fail(erroFormatado);
-        }
-        var registros = await repositorioCheckin.SelecionarRegistrosAsync();
-
-        var checkin = mapper.Map<Checkin>(command);
-
-        var vaga = await repositorioVaga.SelecionarRegistroPorIdAsync(command.vagaId);
-
-        if (vaga is null)
-        {
-            return Result.Fail(ResultadosErro.VagaNaoEncontradaErro(command.vagaId));
-        }
-
-        Hospede? hospede = null;
-
-        if (command.hospedeId.HasValue)
-        {
-            hospede = await repositorioHospede.SelecionarRegistroPorIdAsync(command.hospedeId.Value);
-        }
-
-        if (vaga.Veiculo is null)
-        {
-            var veiculo = await repositorioVeiculo.SelecionarRegistroPorIdAsync(command.veiculoId);
-            vaga.Veiculo = veiculo;
-
-            await repositorioVaga.EditarAsync(vaga.Id, vaga);
-
-            var tickets = await repositorioTicket.SelecionarRegistrosAsync();
-            var ultimoId = tickets.Max(t => t.IdentificadorUnicoSequencial);
-
-            Ticket ticket = null;
-
-            if (hospede != null)
+            var resultadoValidacao = await validator.ValidateAsync(command);
+            if (!resultadoValidacao.IsValid)
             {
-                 ticket  = checkin.GerarTicket(vaga, DateTime.Now, hospede, veiculo, ultimoId);
+                var erros = resultadoValidacao.Errors.Select(e => e.ErrorMessage);
+                return Result.Fail(ResultadosErro.RequisicaoInvalidaErro(erros));
             }
 
-            else
+            try
             {
-                 ticket = checkin.GerarTicket(vaga, DateTime.Now, null, veiculo, ultimoId);
-            }
+                var vaga = await repositorioVaga.SelecionarRegistroPorIdAsync(command.vagaId);
+                if (vaga == null)
+                    return Result.Fail(ResultadosErro.VagaNaoEncontradaErro(command.vagaId));
 
-            checkin.Ticket = ticket;
-            checkin.Vaga = vaga;
-            checkin.Status = StatusCheckin.Ativo;
-            checkin.Veiculo = veiculo;
-            checkin.DataEntrada = DateTime.Now;
+                if (vaga.Veiculo != null)
+                    return Result.Fail(ResultadosErro.VagaOcupadaErro(vaga.Id));
 
-            if(hospede is not null)
-            checkin.Hospede = hospede;
-        }
+                var veiculo = await repositorioVeiculo.SelecionarRegistroPorIdAsync(command.veiculoId);
+                if (veiculo == null)
+                {
+                }
 
-        else
-        {
-            return Result.Fail(ResultadosErro.VagaOcupadaErro(vaga.Id));
-        }
+                Hospede hospede = null;
+                if (command.hospedeId.HasValue)
+                {
+                    hospede = await repositorioHospede.SelecionarRegistroPorIdAsync(command.hospedeId.Value);
+                    if (hospede == null)
+                    {
+                    }
+                }
 
-        try
-        {
+                vaga.Veiculo = veiculo;
+                await repositorioVaga.EditarAsync(vaga.Id, vaga);
+
+                var tickets = await repositorioTicket.SelecionarRegistrosAsync();
+                var ultimoId = tickets.Select(t => t.IdentificadorUnicoSequencial).DefaultIfEmpty(0).Max();
+
+                var ticket = new Ticket
+                {
+                    Id = Guid.NewGuid(),
+                    Vaga = vaga,
+                    Veiculo = veiculo,
+                    Hospede = hospede,
+                    DataEntrada = DateTime.UtcNow
+                };
+                ticket.GerarIdentificadorUnicoSequencial(ultimoId);
+
+                var checkin = new Checkin
+                {
+                    Id = Guid.NewGuid(),
+                    Vaga = vaga,
+                    Veiculo = veiculo,
+                    Hospede = hospede,
+                    Ticket = ticket,
+                    Status = StatusCheckin.Ativo,
+                    DataEntrada = DateTime.UtcNow
+                };
+
                 await repositorioCheckin.CadastrarAsync(checkin);
-
                 await unitOfWork.CommitAsync();
 
-                var result = mapper.Map<RealizarCheckinResult>(checkin);
+                var result = new RealizarCheckinResult(checkin.Id);
+          
+
                 return Result.Ok(result);
-
-
             }
             catch (Exception ex)
             {
                 await unitOfWork.RollbackAsync();
-
                 logger.LogError(ex, "Erro ao cadastrar checkin {Checkin}", command);
-
                 return Result.Fail(ResultadosErro.ExcecaoInternaErro(ex));
             }
+        }
     }
 }

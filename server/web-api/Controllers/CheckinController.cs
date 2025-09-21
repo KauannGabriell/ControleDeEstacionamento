@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using ControleDeEstacionamento.Core.Aplicacao.ModuloCheckin.Commands;
+using ControleDeEstacionamento.WebApi.Models.ModuloCheckin;
 using FluentResults;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

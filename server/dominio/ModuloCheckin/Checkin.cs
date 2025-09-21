@@ -12,7 +12,7 @@ public class Checkin : EntidadeBase<Checkin>
     { 
         get
         {
-            return DateTime.Now;
+            return DateTime.UtcNow;
         }
 
         set
@@ -72,7 +72,7 @@ public class Checkin : EntidadeBase<Checkin>
     public void FinalizarTicket(Checkin checkin)
     {
         checkin.Status = StatusCheckin.Finalizado;
-        checkin.DataSaida = DateTime.Now;
+        checkin.DataSaida = DateTime.UtcNow;
     }
 }
 

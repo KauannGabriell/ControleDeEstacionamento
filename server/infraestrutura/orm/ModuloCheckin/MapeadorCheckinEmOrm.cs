@@ -14,8 +14,13 @@ namespace ControleDeEstacionamento.Infraestutura.Orm.ModuloCheckin
                         .ValueGeneratedNever()
                         .IsRequired();
 
+
             builder.Property(c => c.DataEntrada)
-                        .IsRequired();
+                    .HasColumnType("timestamptz")  
+                    .HasConversion(
+                        v => v,               
+                        v => DateTime.SpecifyKind(v, DateTimeKind.Utc)  
+                    );
 
             builder.Property(c => c.UltimoIdTicket)
                         .IsRequired();
