@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControleDeEstacionamento.In
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControleDeEstacionamento.WebApi", "server\web-api\ControleDeEstacionamento.WebApi.csproj", "{73149BD9-7628-4DDE-319A-7572DCD7F070}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testes", "Testes", "{9A5ABC94-5600-48F9-B520-563AE3BB3B00}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControleDeEstacionamento.Testes.Unidade", "ControleDeEstacionamento.Testes.Unidade\ControleDeEstacionamento.Testes.Unidade.csproj", "{2330D537-A3DD-4D5A-A370-A028DA47DF17}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,10 @@ Global
 		{73149BD9-7628-4DDE-319A-7572DCD7F070}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73149BD9-7628-4DDE-319A-7572DCD7F070}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73149BD9-7628-4DDE-319A-7572DCD7F070}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2330D537-A3DD-4D5A-A370-A028DA47DF17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2330D537-A3DD-4D5A-A370-A028DA47DF17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2330D537-A3DD-4D5A-A370-A028DA47DF17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2330D537-A3DD-4D5A-A370-A028DA47DF17}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,6 +58,8 @@ Global
 		{C4346C12-2081-E051-D371-3EAE223470B0} = {2CFBE476-FA88-4D97-869C-C99CC0496705}
 		{FBFDC8B4-6217-3D6F-46EF-F69570B7D5D1} = {B048DE96-E23A-4D3C-B946-AF2E3157D0F8}
 		{73149BD9-7628-4DDE-319A-7572DCD7F070} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{9A5ABC94-5600-48F9-B520-563AE3BB3B00} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{2330D537-A3DD-4D5A-A370-A028DA47DF17} = {9A5ABC94-5600-48F9-B520-563AE3BB3B00}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C85DAEF6-DE80-4115-BA8F-1B21636E6B2B}
