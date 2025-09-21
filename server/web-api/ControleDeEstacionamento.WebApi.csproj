@@ -25,7 +25,6 @@
     <Folder Include="Models\ModuloAutenticacao\" />
     <Folder Include="Models\ModuloTicket\" />
     <Folder Include="Models\ModuloCheckout\" />
-    <Folder Include="Models\ModuloHospede\" />
   </ItemGroup>
 
   <ItemGroup>

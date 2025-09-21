@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using ControleDeEstacionamento.Core.Aplicacao.ModuloContato.Commands;
 using ControleDeEstacionamento.Core.Aplicacao.ModuloVeiculo.Commands;
 using ControleDeEstacionamento.Models.ModuloVeiculo;
 using ControleDeEstacionamento.WebApi.Models.ModuloVeiculo;
@@ -33,7 +32,7 @@ public class VeiculoController(IMediator mediator, IMapper mapper) : ControllerB
     }
 
     [HttpPost]
-    public async Task<ActionResult<CadastrarVeiculoResponse>> CadastrarContato(CadastrarVeiculoRequest request)
+    public async Task<ActionResult<CadastrarVeiculoResponse>> CadastrarRegistro(CadastrarVeiculoRequest request)
     {
         var command = mapper.Map<CadastrarVeiculoCommand>(request);
 
@@ -60,7 +59,7 @@ public class VeiculoController(IMediator mediator, IMapper mapper) : ControllerB
     }
 
     [HttpDelete("{id:guid}")]
-    public async Task<ActionResult<ExcluirVeiculoResponse>> Excluir(Guid id)
+    public async Task<ActionResult<ExcluirVeiculoResponse>> ExcluirRegistro(Guid id)
     {
         var command = mapper.Map<ExcluirVeiculoCommand>(id);
 

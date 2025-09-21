@@ -1,10 +1,6 @@
 ﻿using AutoMapper;
-using ControleDeEstacionamento.Core.Aplicacao.ModuloContato.Commands;
 using ControleDeEstacionamento.Core.Aplicacao.ModuloVaga.Commands;
-using ControleDeEstacionamento.Core.Aplicacao.ModuloVeiculo.Commands;
-using ControleDeEstacionamento.Models.ModuloVeiculo;
 using ControleDeEstacionamento.WebApi.Models.ModuloVaga;
-using ControleDeEstacionamento.WebApi.Models.ModuloVeiculo;
 using FluentResults;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -18,7 +14,7 @@ public class VagaController(IMediator mediator, IMapper mapper) : ControllerBase
     private readonly IMediator mediator = mediator;
 
     [HttpPost]
-    public async Task<ActionResult<CadastrarVagaResponse>> CadastrarContato(CadastrarVagaRequest request)
+    public async Task<ActionResult<CadastrarVagaResponse>> CadastrarRegistro(CadastrarVagaRequest request)
     {
         var command = mapper.Map<CadastrarVagaCommand>(request);
 

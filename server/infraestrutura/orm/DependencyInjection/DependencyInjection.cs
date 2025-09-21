@@ -1,7 +1,9 @@
 ﻿using ControleDeEstacionamento.Core.Dominio.Compartilhado;
+using ControleDeEstacionamento.Core.Dominio.ModuloHospede;
 using ControleDeEstacionamento.Core.Dominio.ModuloVaga;
 using ControleDeEstacionamento.Core.Dominio.ModuloVeiculo;
 using ControleDeEstacionamento.Infraestrutura.Orm.Compartilhado;
+using ControleDeEstacionamento.Infraestrutura.Orm.ModuloHospede;
 using ControleDeEstacionamento.Infraestrutura.Orm.ModuloVaga;
 using ControleDeEstacionamento.Infraestrutura.Orm.ModuloVeiculo;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +17,7 @@ public static class DependencyInjection
     {
         services.AddScoped<IRepositorioVeiculo, RepositorioVeiculoEmOrm>();
         services.AddScoped<IRepositorioVaga, RepositorioVagaEmOrm>();
+        services.AddScoped<IRepositorioHospede, RepositorioHospedeEmOrm>();
 
         services.AddEntityFrameworkConfig(configuration);
 

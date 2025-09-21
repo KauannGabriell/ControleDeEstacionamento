@@ -2,7 +2,7 @@
 using MediatR;
 using System.Collections.Immutable;
 
-namespace ControleDeEstacionamento.Core.Aplicacao.ModuloContato.Commands;
+namespace ControleDeEstacionamento.Core.Aplicacao.ModuloVeiculo.Commands;
 
 public record SelecionarVeiculosQuery(int? Quantidade) : IRequest<Result<SelecionarVeiculosResult>>;
 

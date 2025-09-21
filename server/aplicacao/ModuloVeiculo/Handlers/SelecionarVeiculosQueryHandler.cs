@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using ControleDeEstacionamento.Core.Aplicacao.Compartilhado;
-using ControleDeEstacionamento.Core.Aplicacao.ModuloContato.Commands;
+using ControleDeEstacionamento.Core.Aplicacao.ModuloVeiculo.Commands;
 using ControleDeEstacionamento.Core.Dominio.ModuloVeiculo;
 using FluentResults;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace ControleDeEstacionamento.Core.Aplicacao.ModuloContato.Handlers;
+namespace ControleDeEstacionamento.Core.Aplicacao.ModuloVeiculo.Handlers;
 public class SelecionarVeiculosQueryHandler(
     IMapper mapper,
     IRepositorioVeiculo repositorioVeiculo,

@@ -11,11 +11,11 @@ using Microsoft.Extensions.Logging;
 
 namespace ControleDeEstacionamento.Core.Aplicacao.ModuloVeiculo.Cadastrar;
 
-public class CadastrarVagaCommandHandler(
+public class CadastrarVeiculoCommandHandler(
     IValidator<CadastrarVeiculoCommand> validator,  
     IMapper mapper,
     IRepositorioVeiculo repositorioVeiculo,
-    ILogger<CadastrarVagaCommandHandler> logger,
+    ILogger<CadastrarVeiculoCommandHandler> logger,
     IUnitOfWork unitOfWork
 ) : IRequestHandler<CadastrarVeiculoCommand, Result<CadastrarVeiculoResult>>
 

@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using ControleDeEstacionamento.Core.Aplicacao.ModuloContato.Commands;
 using ControleDeEstacionamento.Core.Aplicacao.ModuloVeiculo.Commands;
 using ControleDeEstacionamento.Dominio.ModuloVeiculo;
 using Microsoft.EntityFrameworkCore.Query.Internal;
