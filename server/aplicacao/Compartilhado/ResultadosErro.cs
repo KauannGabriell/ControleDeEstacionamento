@@ -46,4 +46,21 @@ public abstract class ResultadosErro
             .CausedBy(ex)
             .WithMetadata("TipoErro", "ExcecaoInterna");
     }
+
+    public static Error VagaOcupadaErro(Guid vagaId)
+    {
+        return new Error("A vaga já está ocupada.")
+            .CausedBy($"Não foi possível realizar o check-in na vaga {vagaId}, pois ela já possui um veículo associado.")
+            .WithMetadata("TipoErro", "VagaOcupada")
+            .WithMetadata("Codigo", 409); 
+    }
+
+    public static Error VagaNaoEncontradaErro(Guid vagaId)
+    {
+        return new Error("A vaga não foi encontrada.")
+            .CausedBy($"Nenhuma vaga com o Id {vagaId} foi localizada.")
+            .WithMetadata("TipoErro", "VagaNaoEncontrada")
+            .WithMetadata("Codigo", 404);
+    }
+
 }

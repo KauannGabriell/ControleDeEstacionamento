@@ -51,28 +51,8 @@ public class Ticket : EntidadeBase<Ticket>
         Vaga = registroEditado.Vaga;
     }
 
-    private void GerarIdentificadorUnicoSequencial(int ultimoId)
+    public void GerarIdentificadorUnicoSequencial(int ultimoId)
     {
         IdentificadorUnicoSequencial = ultimoId + 1;
-    }
-
-    public static Ticket GerarTicket(
-        Vaga vaga,
-        DateTime dataEntrada,
-        Hospede? hospede,
-        Veiculo veiculo,
-        int ultimoId)
-    {
-        var ticket = new Ticket
-        {
-            Vaga = vaga,
-            DataEntrada = dataEntrada,
-            Hospede = hospede,
-            Veiculo = veiculo,
-        };
-
-        ticket.GerarIdentificadorUnicoSequencial(ultimoId);
-
-        return ticket;
     }
 }

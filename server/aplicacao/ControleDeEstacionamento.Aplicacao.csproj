@@ -7,8 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="ModuloCheckin\Commands\" />
-    <Folder Include="ModuloCheckin\Handlers\" />
     <Folder Include="ModuloCheckout\Commands\" />
     <Folder Include="ModuloCheckout\Handlers\" />
     <Folder Include="ModuloFaturamento\Faturamento\Commands\" />

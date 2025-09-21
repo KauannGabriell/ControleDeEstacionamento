@@ -40,7 +40,25 @@ public class Checkin : EntidadeBase<Checkin>
         Hospede = hospede;
         Ticket = ticket;
     }
-    
+    public Ticket GerarTicket(
+      Vaga vaga,
+      DateTime dataEntrada,
+      Hospede? hospede,
+      Veiculo veiculo,
+      int ultimoId)
+    {
+        var ticket = new Ticket
+        {
+            Vaga = vaga,
+            DataEntrada = dataEntrada,
+            Hospede = hospede,
+            Veiculo = veiculo,
+        };
+
+        ticket.GerarIdentificadorUnicoSequencial(ultimoId);
+
+        return ticket;
+    }
     public override void AtualizarRegistro(Checkin registroEditado)
     {
         Veiculo = registroEditado.Veiculo;
